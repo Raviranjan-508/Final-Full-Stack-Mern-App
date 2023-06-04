@@ -1,6 +1,7 @@
 const express = require('express');
 const { userController } = require('./routes/user.route');
 const { connection } = require('./config/db');
+const { notesController } = require('./routes/notes.route');
 
 const app = express();
 const PORT = 8080;
@@ -12,6 +13,9 @@ app.get("/", (req,res) => {
 })
 
 app.use("/user" , userController);
+
+app.use("/notes", notesController);
+
 
 app.listen(PORT , async() => {
     try {
