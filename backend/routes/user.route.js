@@ -32,7 +32,7 @@ userController.post("/login", async(req,res)=>{
         }
         if(result){
             const token = jwt.sign({userId: user._id} , process.env.SECRET);
-            res.send("Login Successfully", token)
+            res.send({message : "Login Successfully", token})
         }
     })
 })
