@@ -28,10 +28,29 @@ notesController.post("/create", async(req,res) => {
     }
 })
 
-notesController.delete("/delete/:noteId", (req,res) => {
+notesController.delete("/delete/:noteId", async (req,res) => {
     const {noteId} = req.params;
-    res.send("deleted", noteId);
+    const deleteNote = await NoteModel.findByOneAndDelete({_id : noteId , userId : req.body.userId})
+    if(deleteNote){
+        res.send("Deleted")
+    }
+    else{
+        res.send("Couldn't deleted")
+    }
 })
+
+notesController.patch("/edit/:noteId", async (req,res) => {
+    const {noteId} = req.params;
+    const deleteNote = await NoteModel.findByOneAndDelete({_id : noteId , userId : req.body.userId})
+    if(deleteNote){
+        res.send("Deleted")
+    }
+    else{
+        res.send("Couldn't deleted")
+    }
+})
+
+
 
 module.exports = {
     notesController
