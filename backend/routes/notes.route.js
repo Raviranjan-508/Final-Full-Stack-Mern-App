@@ -41,16 +41,14 @@ notesController.delete("/delete/:noteId", async (req,res) => {
 
 notesController.patch("/edit/:noteId", async (req,res) => {
     const {noteId} = req.params;
-    const deleteNote = await NoteModel.findByOneAndDelete({_id : noteId , userId : req.body.userId})
-    if(deleteNote){
-        res.send("Deleted")
+    const updateNote = await NoteModel.findOneAndUpdate({_id : noteId , userId : req.body.userId}, {...req.body})
+    if(updateNote){
+        res.send("updated")
     }
     else{
-        res.send("Couldn't deleted")
+        res.send("Couldn't updated")
     }
 })
-
-
 
 module.exports = {
     notesController
